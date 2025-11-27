@@ -14,29 +14,6 @@ get a more recent version or would like support**-->
 
 ## Cite
 
-<!--To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
-
-
-https://doi.org/10.1287/ijoc.2025.1215
-
-https://doi.org/10.1287/ijoc.2025.1215.cd
-
-Below is the BibTex for citing this snapshot of the repository.
-
-```
-@misc{ConicLTS,
-  author =        {Andres Gomez and Jose Neto},
-  publisher =     {INFORMS Journal on Computing},
-  title =         {{Outlier detection in regression: Conic quadratic formulations}},
-  year =          {2025},
-  doi =           {10.1287/ijoc.2025.1215.cd},
-  url =           {https://github.com/INFORMSJoC/2025.1215},
-  note =          {Available for download at https://github.com/INFORMSJoC/2025.1215},
-}  
-
-```
--->
-
 Below is the BibTex for citing this snapshot of the repository.
 
 ```
@@ -59,15 +36,15 @@ The methods are implemented in Java and rely on the commercial solver Mosek. Exe
 
 ## Executing the code
 
-As a java code, the source code is precompiled and can be executed directly via file ./dist/MINLP.jar. Ensure to install Mosek and add file mosek.jar obtained from installing the software to ./dist/lib. 
+As a java code, the source code is precompiled and can be executed directly via file ./dist/MINLP.jar. Ensure to install [Mosek](https://www.mosek.com/downloads) and add file mosek.jar obtained from installing the software to ./dist/lib. 
 
 The code can be executed from the console. Files "runDD.bat" and "runDDOnline.bat" contain examples of how to execute the code in offline and online settings. 
 
 An example command to execute the code to tackle an offline problem is
 ```
-java  -cp ../dist/MINLPDD.jar minlpdd_ConsecutiveOnes.MINLPDD ./data/daily_data_1990.csv 25 0.001 0.25 2 0 101 0
+java  -cp ./dist/MINLPDD.jar minlpdd_ConsecutiveOnes.MINLPDD ./data/daily_data_1990.csv 25 0.001 0.25 2 0 101 0
 ```
-where: "java  -cp ../dist/MINLP.jar" points to the direction of the executable jar file, and "minlpdd_ConsecutiveOnes.MINLPDD" is the class used to run offline instances. The rest of parameters are as follows:
+where: "java  -cp ./dist/MINLP.jar" points to the direction of the executable jar file, and "minlpdd_ConsecutiveOnes.MINLPDD" is the class used to run offline instances. The rest of parameters are as follows:
 * First parameter (./data/daily_data_1990.csv) is a path to the dataset to use
 * Second parameter (25) is the number of time periods to use
 * Third parameter (0.001) is the weight of the L0 parameter (objective cost for the discrete variables)
@@ -79,7 +56,7 @@ where: "java  -cp ../dist/MINLP.jar" points to the direction of the executable j
 
 An example command to execute the code to simulate solution in an online setting is
 ```
-java  -cp ../dist/MINLPDD.jar minlpdd_ConsecutiveOnes.MINLPDDOnline ./data/daily_data_1990.csv 7022 0.001 0.25 2 0 200 101 1
+java  -cp ./dist/MINLPDD.jar minlpdd_ConsecutiveOnes.MINLPDDOnline ./data/daily_data_1990.csv 7022 0.001 0.25 2 0 200 101 1
 ```
 where: "java  -cp ../dist/MINLPDD.jar minlpdd_ConsecutiveOnes.MINLPDDOnline" points to the direction of the executable jar file, and "minlpdd_ConsecutiveOnes.MINLPDDOnline" is the class used to run online instances. The rest of parameters are as follows:
 * First parameter (./data/daily_data_1990.csv) is a path to the dataset to use
@@ -147,6 +124,8 @@ For online problems, each row is organized as follows:
 To replicate the results in offline setting, reported in Table 1, Table 2 and Figure 5, Figure 6 and Figure 7 of the paper, use file runDD.bat (on a Windows machine).
 
 To replicate the results in online setting, reported in Figure 4 and Figure 1 of the paper, use file runDDOnline.bat (on a Windows machine).
+
+Note that Mosek 10.0 was used in the paper. The experiments were run in a laptop with a 12th Gen Intel Core i7-1280 CPU and 32 GB RAM. All experiments were run using a single thread.
 
 ## Source code
 The source code can be found in the src folder.
