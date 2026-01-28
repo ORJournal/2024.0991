@@ -121,7 +121,7 @@ For online problems, each row is organized as follows:
 
 ## Replicating
 
-To replicate the results in offline setting, reported in Table 1, Table 2 and Figure 5, Figure 6 and Figure 7 of the paper, use file runDD.bat (on a Windows machine).
+To replicate the results in offline setting, reported in Table 1, Table 2 and Figure 5, Figure 6 and Figure 7 of the paper, use file runDD.bat (on a Windows machine). This file creates the raw output file resultsOffline.csv, stored in the results folder. To process this result to generate Tables 1 and 2 from the paper, use file generateTables.bat. This would create files Table1.csv and Table2.csv in the results folder, with the information from the respective tables. 
 
 To replicate the results in online setting, reported in Figure 4 and Figure 1 of the paper, use file runDDOnline.bat (on a Windows machine).
 
