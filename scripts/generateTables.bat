@@ -1,0 +1,2 @@
+java  -cp ../dist/MINLPDD.jar data_handler.Table1Parser ../results/resultsOffline.csv ../results/Table1.csv
+java  -cp ../dist/MINLPDD.jar data_handler.Table2Parser ../results/resultsOffline.csv ../results/Table2.csv
