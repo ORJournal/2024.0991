@@ -123,9 +123,9 @@ For online problems, each row is organized as follows:
 
 ## Replicating
 
-To replicate the results in offline setting, reported in Table 1, Table 2, Table 3 and Figure 5, Figure 6 and Figure 7 of the paper, use file runDD.bat (on a Windows machine). This file creates the raw output file resultsOffline.csv, stored in the results folder. To process this result to generate Tables 1 and 2-3 from the paper, use file generateTables.bat. This would create files Table1.csv and Table2.csv in the results folder, with the information from the respective tables (file Table 2 contains information from Table 3 as well). 
+To replicate the results in offline setting, reported in Table 1, Table 2, and Figure 5, Figure 6 and Figure 7 of the paper, use file runDD.bat (on a Windows machine). This file creates the raw output file resultsOffline.csv, stored in the results folder. To replicate the results reported in Table 3, use file runDDTable3.csv, which will store the raw output in the same file resultsOffline.csv. To process this result to generate Tables 1 and 2-3 from the paper, use file generateTables.bat. This would create files Table1.csv and Table2.csv in the results folder, with the information from the respective tables (file Table 2 contains information from Table 3 as well if runDDTable3.csv was used). 
 
-To replicate the results in online setting, reported in Table 4 and Figure 1 of the paper, use file runDDOnline.bat (on a Windows machine).
+To replicate the results in online setting, reported in Table 4 and Figure 1 of the paper, use file runDDOnline.bat (on a Windows machine). To process this result to generate Table 4 from the paper, use file generateTableOnline.bat. This would create file Table4.csv in the results folder, with the information of that table.
 
 Note that Mosek 10.0 was used in the paper. The experiments were run in a laptop with a 12th Gen Intel Core i7-1280 CPU and 32 GB RAM. All experiments were run using a single thread.
 
