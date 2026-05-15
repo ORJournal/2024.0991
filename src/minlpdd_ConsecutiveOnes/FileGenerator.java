@@ -23,24 +23,25 @@ public class FileGenerator {
 
         String[] data = new String[]{"../data/daily_data_1990.csv"};
 
-        int[] sizes = new int[]{25,50,75,100,150,200,300,500};
-
-        double[] l0s = new double[]{0.001, 0.005, 0.01, 0.02, 0.05, 0.1};
+//        int[] sizes = new int[]{25,50,75,100,150,200,300,500};
+        int[] sizes = new int[]{25};
+        double[] l0s = new double[]{0.001,0.005, 0.010, 0.020, 0.050, 0.100};
 //        double[] l0s = new double[]{0.001};
         double[] l2s = new double[]{0.25, 0.5, 1.0, 2.0, 5.0};
 //        double[] l2s = new double[]{0.25};
 
-        int[] kernels = new int[]{2, 3};
+//        int[] kernels = new int[]{2, 3};
+        int[] kernels = new int[]{5,10};
 //        int[] kernels = new int[]{5};
         int[] consecutives = new int[]{0,5,10};
 //        int[] consecutives = new int[]{0};
         int[] seeds = new int[]{101, 102, 103, 104, 105};
 //        int[] seeds = new int[]{101};
 
-        int[] methods = new int[]{0, 1};
+        int[] methods = new int[]{ 0,1};
 //        int[] methods = new int[]{1};
 
-        try ( FileWriter out = new FileWriter(new File("./scripts/runDD.bat"))) {
+        try ( FileWriter out = new FileWriter(new File("./scripts/runDDTable3.bat"))) {
             for (String dat : data) {
                 for (int size : sizes) {
                     for (double l0 : l0s) {

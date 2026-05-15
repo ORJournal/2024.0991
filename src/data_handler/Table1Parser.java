@@ -45,7 +45,7 @@ public class Table1Parser {
         String line;
         String[] row, value;
         Map<String,double[]> table= new HashMap<>();
-        
+        boolean solved;
 
         try {
             br = new BufferedReader(new FileReader(path));
@@ -62,17 +62,25 @@ public class Table1Parser {
                     values[0]+=1; // Number of instances solved with mosek observed with this key
                     values[1]+=Double.parseDouble(row[12].trim()); // Time used by Mosek
                     values[2]+=Double.parseDouble(row[17].trim()); // Nodes explored by Mosek
-                    values[3]+=Double.parseDouble(row[18].trim())<1e-4?1:0; // Number of instances solved to optimality
+                    values[3]+=(Double.parseDouble(row[18].trim())<1e-4?1:0); // Number of instances solved to optimality
                 }
                 else // DD
                 {
                     values[4]+=1; // Number of instances solved with DD observed with this key
-                    values[5]+=Double.parseDouble(row[9].trim()); // Number of arcs in the DD
-                    values[6]+=Double.parseDouble(row[10].trim()); // Time to construct the DD
-                    values[7]+=Double.parseDouble(row[11].trim()); // Time to solve the shortest path in the DD
-                    values[8]+=values[6]<600?1:0; // Number of instances solved to to optimality
-                    values[9]+=Double.parseDouble(row[12].trim()); // Time to solve the SOCP relaxation
-                    
+                    solved=Double.parseDouble(row[9].trim())>0;
+                    if(solved)
+                    {
+                        values[5]+=Double.parseDouble(row[9].trim()); // Number of arcs in the DD
+                        values[6]+=Double.parseDouble(row[10].trim()); // Time to construct the DD
+                        values[7]+=Double.parseDouble(row[11].trim()); // Time to solve the shortest path in the DD
+                        values[8]+=1; // Number of instances solved to optimality
+                        values[9]+=Double.parseDouble(row[12].trim()); // Time to solve the SOCP relaxation
+//                    System.out.println(name+"\t"+values[6]+ " "+values[8]);
+                    }
+                    else
+                    {
+                        values[6]+=1800;
+                    }
                 }
                 table.put(name, values);
             }
@@ -100,17 +108,26 @@ public class Table1Parser {
        
         try (FileWriter out = new FileWriter(new File(path), false)) {
 //            out.write(F.length+","+F[0].length+"\n");
-            out.write("tau n, time_msk, nodes_msk, perc_msk, arcs_dd, time_dd, time_sp, perc_dd, time_socp\n");
+            out.write("tau, n, time_msk, nodes_msk, perc_msk, arcs_dd, time_dd, time_sp, perc_dd, time_socp\n");
             for (Map.Entry<String, double[]> entry : table.entrySet()) {
                 
-                String key = entry.getKey();
+                String[] key = entry.getKey().split(" ");
+                
                 double[] val = entry.getValue();
-                out.write(key+",");
+                out.write(key[0]+","+key[1]+",");
                 for (int i = 1; i <= 3; i++) {
                     out.write(val[i]/val[0]+",");
                 }
                 for (int i = 5; i <= 9; i++) {
-                    out.write(val[i]/val[4]+",");
+                    if( i==8 || i==6)
+                    {
+                        out.write(val[i]/val[4]+",");
+                    }
+                    else
+                    {
+                        out.write(val[i]/val[8]+(i<9?",":""));
+                    }
+                    
                 }
                 out.write("\n");
                 

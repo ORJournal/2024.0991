@@ -62,6 +62,8 @@ public class MINLPDD {
             output[0] = 0;
             output[1] = 0;
         } else if (method >= 1) {
+            
+            
 
             double[] c = new double[instance.n]; // vector of cost for discrete variables
 
@@ -69,7 +71,8 @@ public class MINLPDD {
                 c[i] = L0regularization;
                 instance.Q[i][i] += instance.diagonal[i];
             }
-            instance.computeEigendecomposition(instance.Q);
+            double[][] Ffull=instance.computeEigendecomposition(instance.Q);
+            export(args, choleskyOfFFtPlusLambdaI(Ffull, 0));
             output[12]=instance.truncation;
             output[13]=Math.pow(2, instance.truncation);
             output[14]=instance.condNumber;
@@ -179,6 +182,100 @@ public class MINLPDD {
             }
 
             out.write("\n");
+
+        }
+    }
+    
+    
+     public static double[][] choleskyOfFFtPlusLambdaI(double[][] F, double lambda) {
+        if (F == null || F.length == 0 || F[0] == null) {
+            throw new IllegalArgumentException("F must be a non-empty rectangular matrix.");
+        }
+        if (lambda < 0) {
+            throw new IllegalArgumentException("lambda must be >= 0.");
+        }
+        final int m = F.length;
+        final int n = F[0].length;
+        for (int i = 1; i < m; i++) {
+            if (F[i].length != n) {
+                throw new IllegalArgumentException("All rows of F must have the same length.");
+            }
+        }
+
+        // Build A = F F' + lambda I, but only the lower triangle is needed.
+        double[][] A = new double[m][m];
+        // Compute symmetric Gram matrix efficiently: A[i][j] = sum_k F[i][k] * F[j][k], for j<=i.
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j <= i; j++) {
+                double s = 0.0;
+                double[] Fi = F[i];
+                double[] Fj = F[j];
+                for (int k = 0; k < n; k++) {
+                    s += Fi[k] * Fj[k];
+                }
+                if (i == j) s += lambda; // add lambda to diagonal
+                A[i][j] = s;             // store lower triangle
+            }
+        }
+
+        // Perform Cholesky on A's lower triangle in-place into L (lower-triangular).
+        double[][] L = new double[m][m];
+        final double eps = 1e-14; // small tolerance for guarding against numerical negatives
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j <= i; j++) {
+                double sum = A[i][j];
+                for (int k = 0; k < j; k++) {
+                    sum -= L[i][k] * L[j][k];
+                }
+
+                if (i == j) {
+                    if (sum <= eps) {
+                        // Not SPD numerically; suggest increasing lambda
+                        throw new IllegalArgumentException(
+                            "F F' + lambda I is not numerically SPD at row " + i +
+                            ". Consider using a larger lambda.");
+                    }
+                    L[i][j] = Math.sqrt(sum);
+                } else {
+                    L[i][j] = sum / L[j][j];
+                }
+            }
+        }
+        return L;
+    }
+
+    /**
+     * Exports the solution to a CSV file. <br>
+     *
+     * @param args Arguments of the instance used. <br>
+     * @param vals Values to export. <br>
+     * @throws IOException
+     */
+    static void export(String[] args, double[][] F) throws IOException {
+
+        String name = "../data/F_";
+        for (int i = 1; i < args.length; i++) {
+            name += args[i] + "_";
+        }
+          
+        name += ".csv";
+
+        try (FileWriter out = new FileWriter(new File(name), false)) {
+//            out.write(F.length+","+F[0].length+"\n");
+            for (int i = 0; i < F.length; i++) {
+                for (int j = 0; j < F[i].length - 1; j++) {
+                    if(Math.abs(F[i][j])>1e-6)
+                    out.write(F[i][j] + ",");
+                    else
+                        out.write( " 0,");
+                }
+                 if(Math.abs(F[i][F[i].length - 1])>1e-6)
+                    out.write(F[i][F[i].length - 1] + "\n");
+                    else
+                    out.write("0\n");
+                
+            }
 
         }
     }
