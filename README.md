@@ -10,11 +10,17 @@ that were used in the research reported on in the paper
 [Real-time solution of quadratic optimization problems with banded matrices and indicator variables](https://arxiv.org/abs/2405.03051) by Andres Gomez, Shaoning Han and Leonardo Lozano. 
 
 
-<!--**Important: This code is being developed on an on-going basis at 
+**This code is being developed on an on-going basis at 
 https://github.com/agomez8/ddBanded. Please go there if you would like to
-get a more recent version or would like support**-->
+get a more recent version or would like support**
 
 ## Cite
+
+To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
+
+<https://doi.org/10.1287/opre.2024.0000>
+
+<https://doi.org/10.1287/opre.2024.0000.cd>
 
 Below is the BibTex for citing this snapshot of the repository.
 
