@@ -28,6 +28,7 @@ Below is the BibTex for citing this snapshot of the repository.
 @misc{ddBanded,
   author =        {Andres Gomez and Shaoning Han and Leonardo Lozano},
   title =         {{Real-time solution of quadratic optimization problems with banded matrices and indicator variables}},
+  publisher =     {Operations Research},
   year =          {2025},          
   doi =           {10.1287/opre.2024.0991.cd},
   note =          {Available for download at https://github.com/ORJournal/2024.0991},
