@@ -1,4 +1,4 @@
-[![Operations Research Journal Logo](https://orjournal.github.io/OperationsReseachHeader.jpg)](https://pubsonline.informs.org/journal/opre)
+[![Operations Research Journal Logo](https://orjournal.github.io/OperationsResearchHeader.jpg)](https://pubsonline.informs.org/journal/opre)
 
 
 # ddBanded
@@ -18,9 +18,9 @@ get a more recent version or would like support**
 
 To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
 
-<https://doi.org/10.1287/opre.2024.0000>
+<https://doi.org/10.1287/opre.2024.0991>
 
-<https://doi.org/10.1287/opre.2024.0000.cd>
+<https://doi.org/10.1287/opre.2024.0991.cd>
 
 Below is the BibTex for citing this snapshot of the repository.
 
@@ -29,8 +29,8 @@ Below is the BibTex for citing this snapshot of the repository.
   author =        {Andres Gomez and Shaoning Han and Leonardo Lozano},
   title =         {{Real-time solution of quadratic optimization problems with banded matrices and indicator variables}},
   year =          {2025},          
-  url =           {https://github.com/agomez8/ddBanded},
-  note =          {Available for download at https://github.com/agomez8/ddBanded},
+  doi =           {10.1287/opre.2024.0991.cd},
+  note =          {Available for download at https://github.com/ORJournal/2024.0991},
 }  
 
 ```
